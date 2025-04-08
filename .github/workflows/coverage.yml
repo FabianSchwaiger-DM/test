@@ -16,7 +16,7 @@ jobs:
         uses: taiki-e/install-action@cargo-llvm-cov
         
       - name: Build project
-        run: cargo build --release
+        run: cargo build --package test --release
         
       - name: Generate code coverage
         run: cargo llvm-cov --all-features --html -p test
