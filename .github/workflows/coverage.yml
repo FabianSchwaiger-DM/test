@@ -13,5 +13,7 @@ jobs:
         run: rustup update stable
       - name: Install cargo-llvm-cov
         uses: taiki-e/install-action@cargo-llvm-cov
+      - name: Build project
+        run: cargo build --release
       - name: Generate code coverage
         run: cargo llvm-cov --all-features --html
