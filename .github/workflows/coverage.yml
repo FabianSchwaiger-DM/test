@@ -20,7 +20,7 @@ jobs:
       - name: create folder
         run: mkdir ./public
       - name: move index.html
-        run: mv index.html public/index.html
+        run: mv target/llvm-cov/html/index.html public/index.html
       - name: Deploy to GitHub Pages
         if: success()
         uses: peaceiris/actions-gh-pages@v3
