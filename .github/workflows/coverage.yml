@@ -11,7 +11,25 @@ jobs:
       - uses: actions/checkout@v4
       - name: Install Rust
         run: rustup update stable
+
       - name: Install cargo-llvm-cov
         uses: taiki-e/install-action@cargo-llvm-cov
+        
+      - name: Build project
+        run: cargo build --release
+        
       - name: Generate code coverage
         run: cargo llvm-cov --all-features --html
+        
+      - name: Upload Coverage Report as Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-report
+          path: target/llvm-cov/html/index.html
+        
+      - name: Post Coverage Report as GitHub Issue
+        uses: peter-evans/create-issue-from-file@v5
+        with:
+          title: "Biweekly Code Coverage Report - ${{ env.DATE }}"
+          content-filepath: target/llvm-cov/html/index.html
+          labels: coverage, automated-report
