@@ -22,10 +22,12 @@ jobs:
         with:
           name: coverage-report
           path: target/llvm-cov/html/index.html
-
+      - name: Set date variable
+        id: date
+        run: echo "DATE=$(date +'%Y-%m-%d')" >> $GITHUB_ENV
       - name: Post Coverage Report as GitHub Issue
         uses: peter-evans/create-issue-from-file@v5
         with:
-          title: "Biweekly Code Coverage Report - $(date +'%Y-%m-%d')"
+          title: "Biweekly Code Coverage Report - ${{ env.DATE }}"
           content-filepath: target/llvm-cov/html/index.html
           labels: coverage, automated-report
