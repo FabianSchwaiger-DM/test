@@ -17,9 +17,14 @@ jobs:
         run: cargo build --release
       - name: Generate code coverage
         run: cargo llvm-cov --all-features --html
+      - name: create folder
+        run: mkdir ./public
+      - name: move index.html
+        run: mv index.html public/index.html
       - name: Deploy to GitHub Pages
         if: success()
         uses: peaceiris/actions-gh-pages@v3
         with:
            github_token: ${{ secrets.GITHUB_TOKEN }}
+           publish_dir: ./public
            publish_branch: gh-pages
