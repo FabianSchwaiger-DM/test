@@ -30,6 +30,10 @@ jobs:
       - name: Set date variable
         id: date
         run: echo "DATE=$(date +'%Y-%m-%d')" >> $GITHUB_ENV
+      
+      - name: Extract Artifact URL
+        run: |
+          echo "Artifact URL is: ${{ steps.upload_artifact.outputs.artifact-url }}"
         
       - name: Post Coverage Report as GitHub Issue
         uses: dacbd/create-issue-action@main
