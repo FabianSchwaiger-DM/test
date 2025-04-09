@@ -52,5 +52,5 @@ jobs:
               token: ${{ github.token }}
               title: "Biweekly Code Coverage Report - ${{ env.DATE }}"
               body:  A detailed report has been generated.
-                You can see the full report [here]("https://fabianschwaiger-dm.github.io/test/").
+                You can see the full report [here](https://fabianschwaiger-dm.github.io/test/).
               labels: coverage, automated-report
