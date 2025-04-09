@@ -32,8 +32,9 @@ jobs:
         run: echo "DATE=$(date +'%Y-%m-%d')" >> $GITHUB_ENV
         
       - name: Post Coverage Report as GitHub Issue
-        uses: peter-evans/create-issue-from-file@v5
+        uses: peter-evans/create-issue@v3
         with:
           title: "Biweekly Code Coverage Report - ${{ env.DATE }}"
-          content-filepath: target/llvm-cov/html/index.html
+          body:  A detailed report has been generated.
+            You can download the full report [here](https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}/artifacts).
           labels: coverage, automated-report
