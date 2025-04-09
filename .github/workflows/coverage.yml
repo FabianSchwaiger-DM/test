@@ -33,7 +33,7 @@ jobs:
       
       - name: Extract Artifact URL
         run: |
-          echo "Artifact URL is: ${{ steps.upload_artifact.outputs.artifact-url }}"
+          echo "Artifact URL is: ${{ steps.upload_artifact.outputs.url }}"
         
       - name: Post Coverage Report as GitHub Issue
         uses: dacbd/create-issue-action@main
