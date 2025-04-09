@@ -26,6 +26,7 @@ jobs:
         run: cargo llvm-cov --all-features --html
         
       - name: Upload Coverage Report as Artifact
+        id: upload_artifact
         uses: actions/upload-artifact@v4
         with:
           name: coverage-report
@@ -33,7 +34,7 @@ jobs:
       
       - name: Extract Artifact URL
         run: |
-          echo "Artifact URL is: ${{ steps.upload_artifact.outputs.url }}"
+          echo "Artifact URL is: ${{ steps.upload_artifact.outputs.artifact-url }}"
         
       - name: Post Coverage Report as GitHub Issue
         uses: dacbd/create-issue-action@main
