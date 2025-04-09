@@ -31,16 +31,17 @@ jobs:
         with:
           name: coverage-report
           path: target/llvm-cov/html/index.html
-      
-      - name: Extract Artifact URL
-        run: |
-          echo "Artifact URL is: ${{ steps.upload_artifact.outputs.artifact-url }}"
+
+      - name: create folder
+        run: mkdir ./public
         
-      - name: Post Coverage Report as GitHub Issue
-        uses: dacbd/create-issue-action@main
+      - name: move index.html
+        run: mv target/llvm-cov/html/index.html public/index.html
+        
+      - name: Deploy to GitHub Pages
+        if: success()
+        uses: peaceiris/actions-gh-pages@v3
         with:
-          token: ${{ github.token }}
-          title: "Biweekly Code Coverage Report - ${{ env.DATE }}"
-          body:  A detailed report has been generated.
-            You can download the full report [here](${{ steps.upload_artifact.outputs.artifact-url }}).
-          labels: coverage, automated-report
+            github_token: ${{ secrets.GITHUB_TOKEN }}
+            publish_dir: ./public
+            publish_branch: gh-pages
