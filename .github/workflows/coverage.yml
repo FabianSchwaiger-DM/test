@@ -37,5 +37,5 @@ jobs:
           token: ${{ github.token }}
           title: "Biweekly Code Coverage Report - ${{ env.DATE }}"
           body:  A detailed report has been generated.
-            You can download the full report [here](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}/artifacts/${{ steps.artifact-upload-step.outputs.artifact-id }}).
+            You can download the full report ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}/artifacts/${{ steps.artifact-upload-step.outputs.artifact-id }}.
           labels: coverage, automated-report
