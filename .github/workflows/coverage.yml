@@ -34,7 +34,7 @@ jobs:
 
       - name: create folder
         run: mkdir ./public
-        
+
       - name: move index.html
         run: mv target/llvm-cov/html/index.html public/index.html
         
@@ -45,3 +45,12 @@ jobs:
             github_token: ${{ secrets.GITHUB_TOKEN }}
             publish_dir: ./public
             publish_branch: gh-pages
+
+      - name: Post Coverage Report as GitHub Issue
+        uses: dacbd/create-issue-action@main
+        with:
+              token: ${{ github.token }}
+              title: "Biweekly Code Coverage Report - ${{ env.DATE }}"
+              body:  A detailed report has been generated.
+                You can see the full report [here]("https://fabianschwaiger-dm.github.io/test/").
+              labels: coverage, automated-report
