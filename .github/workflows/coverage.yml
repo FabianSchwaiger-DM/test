@@ -43,9 +43,9 @@ jobs:
 
       - name: Extract Function Coverage
         run: |
-          # Extract the total Function Coverage (the last value in the "Totals" row)
-          function_coverage=$(sed -n '/<tr class="light-row-bold">.*<td><pre>Totals<\/pre><\/td>/ {n; s/.*<td><pre>\s*\([0-9.]*%\).*<\/pre><\/td>/\1/p}' coverage/index.html)
-
+          # Extract the Function Coverage value using sed
+          function_coverage=$(sed -n 's/.*Totals[^0-9]*\([0-9.]*%\).*/\1/p' coverage/index.html)
+    
           # Print the Function Coverage value to the logs
           if [ -z "$function_coverage" ]; then
             echo "Function Coverage not found."
@@ -53,7 +53,7 @@ jobs:
             echo "Function Coverage: $function_coverage"
           fi
 
-
+        
 
       - name: move index.html
         run: mv coverage/* ./public/
