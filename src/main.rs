@@ -1,3 +1,5 @@
+pub mod test;
+
 fn main() {
     println!("Hello, world!");
 }
@@ -12,6 +14,8 @@ pub fn mult(a: i32, b: i32) -> i32{
 
 #[cfg(test)]
 mod tests {
+    use crate::test::test;
+
     use super::*; // This allows access to the functions in the parent module
 
     #[test]
@@ -27,5 +31,10 @@ mod tests {
         assert_eq!(mult(2,2), 4);
         assert_eq!(mult(0, 5), 0);
         assert_eq!(mult(7,7), 49);
+    }
+
+    #[test]
+    fn test_test(){
+        test();
     }
 }
