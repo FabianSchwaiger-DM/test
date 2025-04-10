@@ -34,6 +34,13 @@ jobs:
 
       - name: create folder
         run: mkdir ./public
+      
+      - name: organize folder
+        run: mv coverage/html/* coverage/
+      
+      - name: remove html folder
+        run: rmdir coverage/html
+
 
       - name: move index.html
         run: mv coverage/* ./public/
