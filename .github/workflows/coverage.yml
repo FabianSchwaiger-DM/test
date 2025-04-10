@@ -23,7 +23,7 @@ jobs:
         run: cargo build --release
         
       - name: Generate code coverage
-        run: cargo llvm-cov --all-features --html --open --base-dir . --output-path coverage/html
+        run: cargo llvm-cov --all-features --html --output-path coverage/html
         
       - name: Upload Coverage Report as Artifact
         id: upload_artifact
