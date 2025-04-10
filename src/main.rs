@@ -28,9 +28,4 @@ mod tests {
         assert_eq!(mult(0, 5), 0);
         assert_eq!(mult(7,7), 49);
     }
-
-    #[test]
-    fn include_main(){
-        main();
-    }
 }

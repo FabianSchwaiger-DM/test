@@ -43,9 +43,9 @@ jobs:
 
       - name: Extract Function Coverage
         run: |
-          # Extract the Function Coverage percentage from the Totals row using sed
-          function_coverage=$(sed -n '/<pre>Totals<\/pre>/ {n; s/.*<pre>\s*\([0-9.]*%\).*<\/pre>/\1/p}' coverage/index.html)
-          
+          # Extract the Function Coverage value using sed
+          function_coverage=$(sed -n 's/.*Function Coverage[^0-9]*\([0-9.]*%\).*/\1/p' coverage/index.html)
+    
           # Print the Function Coverage value to the logs
           if [ -z "$function_coverage" ]; then
             echo "Function Coverage not found."
