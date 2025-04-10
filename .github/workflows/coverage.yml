@@ -35,15 +35,15 @@ jobs:
       - name: create folder
         run: mkdir ./public
 
-      - name: move index.html
-        run: mv coverage/html/index.html public/index.html
+      #- name: move index.html
+       # run: mv coverage/html/index.html public/index.html
         
       - name: Deploy to GitHub Pages
         if: success()
         uses: peaceiris/actions-gh-pages@v3
         with:
             github_token: ${{ secrets.GITHUB_TOKEN }}
-            publish_dir: ./public
+            publish_dir: ./coverage
             publish_branch: gh-pages
 
       - name: Post Coverage Report as GitHub Issue
