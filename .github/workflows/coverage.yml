@@ -46,12 +46,14 @@ jobs:
           # Extract the Function Coverage value using sed
           function_coverage=$(sed -n 's/.*Totals[^0-9]*\([0-9.]*%\).*/\1/p' coverage/index.html)
     
-          # Print the Function Coverage value to the logs
+          # Check if coverage was found, otherwise set the default value
           if [ -z "$function_coverage" ]; then
             echo "Function Coverage not found."
-          else
-            echo "Function Coverage: $function_coverage"
+            function_coverage="Not Available"
           fi
+
+          # Store the function coverage value as an environment variable
+          echo "FUNCTION_COVERAGE=$function_coverage" >> $GITHUB_ENV
 
         
 
@@ -72,7 +74,7 @@ jobs:
         uses: dacbd/create-issue-action@main
         with:
               token: ${{ github.token }}
-              title: "Biweekly Code Coverage Report - ${{ env.DATE }}"
+              title: "Biweekly Code Coverage Report - ${{ env.DATE }}, Total Function Coverage: ${{env.FUNCTION_COVERAGE}}"
               body:  A detailed report has been generated.
                 You can see the full report [here](https://fabianschwaiger-dm.github.io/test/).
               labels: coverage, automated-report
