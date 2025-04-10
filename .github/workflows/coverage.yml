@@ -21,12 +21,9 @@ jobs:
         
       - name: Build project
         run: cargo build --release
-      
-      - name: Create env variable llvm
-        run: LLVM_COV_FLAGS="--path-equivalence /home/runner/work/test/test=."
         
       - name: Generate code coverage
-        run: cargo llvm-cov --all-features --html --output-dir coverage --workspace
+        run: cargo llvm-cov --all-features --html --output-dir coverage --remap-path-prefix "$(pwd)=."
         
       - name: Upload Coverage Report as Artifact
         id: upload_artifact
