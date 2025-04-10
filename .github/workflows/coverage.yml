@@ -23,20 +23,20 @@ jobs:
         run: cargo build --release
         
       - name: Generate code coverage
-        run: cargo llvm-cov --all-features --html --output-path coverage/html
+        run: cargo llvm-cov --all-features --html --output-dir coverage/html
         
       - name: Upload Coverage Report as Artifact
         id: upload_artifact
         uses: actions/upload-artifact@v4
         with:
           name: coverage-report
-          path: target/llvm-cov/html/index.html
+          path: coverage/html/index.html
 
       - name: create folder
         run: mkdir ./public
 
       - name: move index.html
-        run: mv target/llvm-cov/html/index.html public/index.html
+        run: mv coverage/html/index.html public/index.html
         
       - name: Deploy to GitHub Pages
         if: success()
