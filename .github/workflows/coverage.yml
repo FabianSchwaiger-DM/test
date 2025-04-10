@@ -41,9 +41,19 @@ jobs:
       - name: remove html folder
         run: rmdir coverage/html
 
+      - name: Extract Function Coverage
+        run: |
+          # Extract the Function Coverage value from the HTML report
+          function_coverage=$(grep -oP 'Totals.*Function Coverage.*\K[0-9.]+%' coverage/index.html)
+          
+          # Print the Function Coverage value to the logs
+          echo "Function Coverage: $function_coverage"
+
 
       - name: move index.html
         run: mv coverage/* ./public/
+
+      
         
       - name: Deploy to GitHub Pages
         if: success()
